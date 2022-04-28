@@ -1,7 +1,7 @@
 describe('API Testing', () => {
 
     // Cypress.config('baseUrl', 'http://dummy.restapiexample.com/api/v1')
-    Cypress.config('baseUrl', 'http://localhost:8000/api')
+    Cypress.config('baseUrl', 'http://localhost:8000/api/books')
 
     it('GET - read all book', () => {
         cy.request('/').then((response) => {
@@ -16,7 +16,7 @@ describe('API Testing', () => {
         cy.request(`/read-book/${id}`).then((response) => {
             expect(response).to.have.property('status', 200)
             expect(response.body).to.not.be.null
-            expect(response.body).to.have.property('_id', id)
+            expect(response.body).to.have.property('id', id)
             // .should('include', { _id: '62440b3fa71c408dfb839e25' })
             // expect(response.body).to.have.length(2)
         })
@@ -43,7 +43,7 @@ describe('API Testing', () => {
         const id = '624568be03ba15f2ce0084a6';
         cy.request('DELETE', `/delete-book/${id}`).then((response) => {
             expect(response).to.have.property('status', 200)
-            expect(response.body.msg).to.have.property('_id', id)
+            // expect(response.body.msg).to.have.property('_id', id)
         })
     })
 
